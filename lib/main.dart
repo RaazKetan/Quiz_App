@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
-void main(){
-runApp(MyApp());
+// void main(){
+// runApp(MyApp());
+// }
+void main()=> runApp(MyApp());
+
+class MyApp extends StatefulWidget {
+   @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _MyAppState();
+  }
 }
+class _MyAppState extends State<MyApp>{
+  var _questionIndex = 0;
 
-class MyApp extends StatelessWidget {
-
+  void answerQuestion(){
+    setState(() {
+      _questionIndex = _questionIndex+1;
+    });
+    print(_questionIndex);
+}
+  @override
   Widget build (BuildContext context)
   {
     var question = [
       'Whats\'s your favorite color?',
-      'Whats\'s your favorite color?',
-      'Whats\'s your favorite color?',
+      'Whats\'s your favorite Animal?',
+      'Whats\'s your favorite Food?',
     ];
     return MaterialApp(
       home: Scaffold(
@@ -20,10 +37,12 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text('The question!'),
+            Question(
+                question[_questionIndex],
+            ),
             ElevatedButton(
               onPressed: null,
-              child: Text('Answer 2'),
+              child: Text('Answer 1'),
             ),
             ElevatedButton(
               onPressed: null,
@@ -31,12 +50,11 @@ class MyApp extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: null,
-              child: Text('Answer 2'),
+              child: Text('Answer 3'),
             ),
           ],
         )
       ),
     );
-
   }
 }
