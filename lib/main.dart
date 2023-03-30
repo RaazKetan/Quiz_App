@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 // void main(){
 // runApp(MyApp());
@@ -20,7 +21,6 @@ class _MyAppState extends State<MyApp>{
     setState(() {
       _questionIndex = _questionIndex+1;
     });
-    print(_questionIndex);
 }
   @override
   Widget build (BuildContext context)
@@ -33,25 +33,16 @@ class _MyAppState extends State<MyApp>{
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Center(child: Text('Quiz App')),
+          title: const Center(child: Text('Quiz App')),
         ),
         body: Column(
           children: [
             Question(
                 question[_questionIndex],
             ),
-            ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 1'),
-            ),
-            ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 2'),
-            ),
-            ElevatedButton(
-              onPressed: null,
-              child: Text('Answer 3'),
-            ),
+            Answer(answerQuestion),
+            Answer(answerQuestion),
+            Answer(answerQuestion),
           ],
         )
       ),
