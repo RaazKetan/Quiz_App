@@ -18,20 +18,32 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp>{
   final  _question = [
     {'questionText':  'Whats\'s your favorite color?',
-      'answers':['Black', 'Red', 'Green', 'White', 'Blue'],
+      'answers':[{'text':'Black','score':10},
+        {'text':'White','score':20},
+        {'text':'Red','score':30},
+        {'text':'Blue','score':40}],
     },
     {'questionText':  'Whats\'s your favorite Animal?',
-      'answers':['Dog', 'Cat', 'Lion', 'Tiger'],
+      'answers':[
+        {'text':'Lion','score':10},
+        {'text':'Tiger','score':20},
+        {'text':'Dog','score':30},
+        {'text':'Cat','score':40},
+      ],
     },
     {'questionText':  'Whats\'s your favorite Language?',
-      'answers':['Dart', 'Pyhton', 'C', 'C++'],
+      'answers':[
+        {'text':'C++','score':10},
+        {'text':'C','score':20},
+        {'text':'Python','score':30},
+        {'text':'Java','score':40}
+      ],
     },
   ];
   var _questionIndex = 0;
-
-  void _answerQuestion(){
-    var aBOOl = true;
-
+var _totalScore = 0;
+  void _answerQuestion(int score){
+     _totalScore += score;
     setState(() {
       _questionIndex = _questionIndex+1;
     });
@@ -53,7 +65,7 @@ class _MyAppState extends State<MyApp>{
         ),
         body: _questionIndex< _question.length
             ? Quiz(
-            answerQuestion: _answerQuestion,
+            answerQuestion: _answerQuestion(_totalScore),
             questionIndex: _questionIndex,
             question:_question,
         )

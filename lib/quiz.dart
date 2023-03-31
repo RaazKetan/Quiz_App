@@ -22,9 +22,9 @@ Quiz(
         ),
         //... spread operator to extract the elements of the answer list
         // form the current question object as a separate list. The as
-        ...(question[questionIndex]['answers'] as List<String>)
+        ...(question[questionIndex]['answers'] as List<Map<String, Object>>)
             .map((answer){
-          return Answer(answerQuestion,answer);
+          return Answer(() => answerQuestion(answer['score']),answer['text'] as String);
         }).toList()
       ],
     );
