@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp>{
   var _questionIndex = 0;
 
-  void answerQuestion(){
+  void _answerQuestion(){
     setState(() {
       _questionIndex = _questionIndex+1;
     });
@@ -25,10 +25,16 @@ class _MyAppState extends State<MyApp>{
   @override
   Widget build (BuildContext context)
   {
-    var question = [
-      'Whats\'s your favorite color?',
-      'Whats\'s your favorite Animal?',
-      'Whats\'s your favorite Food?',
+    List<Map<String, dynamic>> question = [
+      {'questionText':  'Whats\'s your favorite color?',
+        'answers':['Black', 'Red', 'Green', 'White', 'Blue'],
+      },
+      {'questionText':  'Whats\'s your favorite Animal?',
+        'answers':['Dog', 'Cat', 'Lion', 'Tiger'],
+      },
+      {'questionText':  'Whats\'s your favorite Language?',
+        'answers':['Dart', 'Pyhton', 'C', 'C++'],
+      },
     ];
     return MaterialApp(
       home: Scaffold(
@@ -38,11 +44,15 @@ class _MyAppState extends State<MyApp>{
         body: Column(
           children: [
             Question(
-                question[_questionIndex],
+                question[_questionIndex]['questionText'],
             ),
-            Answer(answerQuestion),
-            Answer(answerQuestion),
-            Answer(answerQuestion),
+          //... spread operator to extract the elements of the answer list
+            // form the current question object as a separate list. The as
+          ...(question[_questionIndex]['answers'] as List<String>)
+              .map((answer){
+            return Answer(_answerQuestion,answer);
+            }).toList()
+
           ],
         )
       ),
