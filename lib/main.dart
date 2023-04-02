@@ -42,19 +42,21 @@ class _MyAppState extends State<MyApp>{
   ];
   var _questionIndex = 0;
 var _totalScore = 0;
+
+void _resetQuiz(){
+  setState(() {
+    _questionIndex = 0;
+    _totalScore = 0;
+  });
+}
   void _answerQuestion(int score){
-     _totalScore += score;
+
     setState(() {
+      _totalScore += score;
       _questionIndex = _questionIndex+1;
     });
-    if(_questionIndex < _question.length){
-      print('We have more Question');
-    }
-    else
-      {
-        print('No more Question');
-      }
 }
+
   @override
   Widget build (BuildContext context)
   {
@@ -65,11 +67,11 @@ var _totalScore = 0;
         ),
         body: _questionIndex< _question.length
             ? Quiz(
-            answerQuestion: _answerQuestion(_totalScore),
+            answerQuestion: _answerQuestion,
             questionIndex: _questionIndex,
             question:_question,
         )
-       : const Result(),
+       :  Result(_totalScore, _resetQuiz),
       ),
     );
   }
